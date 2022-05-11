@@ -1,4 +1,3 @@
-import { NextPage } from "next";
 import { ReactNode, useState } from "react";
 import { ArrowDownIcon, ArrowUpIcon, Container } from "./styles";
 
@@ -7,7 +6,7 @@ interface IAccordionProps {
   children: ReactNode;
 }
 
-export const Accordion: NextPage<IAccordionProps> = ({ title, children }) => {
+export const Accordion = ({ title, children }: IAccordionProps) => {
   const [isActive, setIsActive] = useState(false);
 
   return (

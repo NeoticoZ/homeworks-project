@@ -67,7 +67,7 @@ export const Wrapper = styled.div`
         background: var(--white);
         border-radius: 50%;
         position: absolute;
-        top: 0.1rem;
+        top: 0.13rem;
         left: 0.2rem;
 
         transition: all 0.3s;

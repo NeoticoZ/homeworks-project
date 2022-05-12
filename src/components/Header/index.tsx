@@ -1,8 +1,7 @@
-import { NextComponentType } from "next";
 import { useState } from "react";
 import { Container, HamburgerIcon, MoonIcon, SunIcon, Wrapper } from "./styles";
 
-export const Header: NextComponentType = () => {
+export const Header = () => {
   const [inputChecked, setInputChecked] = useState(false);
 
   return (

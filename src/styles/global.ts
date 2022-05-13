@@ -53,7 +53,7 @@ export default createGlobalStyle`
     overflow-x: hidden;
   }
 
-  body, button, input, select, textarea {
+  body, button, input, select, textarea, label {
     font-family: "Roboto", sans-serif;
     font-size: 1rem;
     color: var(--gray-700);

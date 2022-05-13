@@ -1,5 +1,6 @@
 import { NextPage } from "next";
 import { Header } from "../components/Header";
+import { NotificationButton } from "../components/NotificationButton";
 import {
   Container,
   OptionsIcon,
@@ -53,6 +54,8 @@ const Dashboard: NextPage = () => {
           </Tasks>
         </Wrapper>
       </Container>
+
+      <NotificationButton />
     </>
   );
 };

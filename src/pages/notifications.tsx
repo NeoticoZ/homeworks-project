@@ -1,13 +1,14 @@
 import { NextPage } from "next";
 import { Accordion } from "../components/Accordion";
 import { Header } from "../components/Header";
+import { NotificationButton } from "../components/NotificationButton";
 import {
   AccordionsWrapper,
   Container,
   Wrapper,
-} from "../styles/pages/warnings";
+} from "../styles/pages/notifications";
 
-const Warnings: NextPage = () => {
+const Notifications: NextPage = () => {
   return (
     <>
       <Header />
@@ -33,8 +34,10 @@ const Warnings: NextPage = () => {
           </AccordionsWrapper>
         </Wrapper>
       </Container>
+
+      <NotificationButton />
     </>
   );
 };
 
-export default Warnings;
+export default Notifications;

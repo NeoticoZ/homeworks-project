@@ -34,8 +34,8 @@ const Login: NextPage = () => {
 
         <button className="button">Entrar</button>
 
-        <div className="form-navigation">
-          <span className="navigation__text">Ainda não tem conta?</span>
+        <div className="navigation">
+          <span className="navigation__text">Ainda não tem uma conta?</span>
 
           <Link href="/register">
             <a className="navigation__link">Cadastre-se</a>

@@ -48,7 +48,7 @@ const Register: NextPage = () => {
         <button className="button">Entrar</button>
 
         <div className="navigation">
-          <span className="navigation__text">Já tem uma tem conta?</span>
+          <span className="navigation__text">Já tem uma conta?</span>
 
           <Link href="/login">
             <a className="navigation__link">Fazer login</a>

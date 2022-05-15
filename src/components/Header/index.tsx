@@ -1,12 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Container, HamburgerIcon, MoonIcon, SunIcon, Wrapper } from "./styles";
 
 interface IHeaderProps {
   toggleTheme: () => void;
+  theme: string;
 }
 
-export const Header = ({ toggleTheme }: IHeaderProps) => {
+export const Header = ({ toggleTheme, theme }: IHeaderProps) => {
   const [inputChecked, setInputChecked] = useState(false);
+
+  useEffect(() => {
+    if (theme === "dark") {
+      setInputChecked(true);
+    } else {
+      setInputChecked(false);
+    }
+  }, [theme]);
 
   return (
     <Container>

@@ -2,7 +2,7 @@ import type { AppProps } from "next/app";
 import { ThemeProvider } from "styled-components";
 import { lightTheme, darkTheme } from "../styles/themes";
 import GlobalStyles from "../styles/global";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Header } from "../components/Header";
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -13,9 +13,16 @@ function MyApp({ Component, pageProps }: AppProps) {
     window.localStorage.setItem("theme", theme === "light" ? "dark" : "light");
   };
 
+  useEffect(() => {
+    const localTheme = window.localStorage.getItem("theme");
+    if (localTheme) {
+      setTheme(localTheme);
+    }
+  }, []);
+
   return (
     <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
-      <Header toggleTheme={toggleTheme} />
+      <Header toggleTheme={toggleTheme} theme={theme} />
 
       <Component {...pageProps} />
 

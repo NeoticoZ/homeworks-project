@@ -10,35 +10,34 @@ export const Container = styled.main`
 
 export const Tab = styled.div`
   button {
-    background: var(--white);
-    color: var(--gray-700);
+    background: ${({ theme }) => theme.primary};
 
     padding: 0.8rem 2rem;
 
-    border-right: 1px solid var(--gray-400);
-    border-top: 1px solid var(--gray-400);
+    border-right: 1px solid ${({ theme }) => theme.border};
+    border-top: 1px solid ${({ theme }) => theme.border};
 
     &:first-child {
-      border-left: 1px solid var(--gray-400);
+      border-left: 1px solid ${({ theme }) => theme.border};
     }
 
     &.active {
       background: var(--blue);
-      color: white;
+      color: var(--white);
+    }
+
+    &:hover:not(.active) {
+      background: ${({ theme }) => theme.secondary};
     }
   }
 `;
 
 export const Wrapper = styled.section`
-  background: var(--white);
+  background: ${({ theme }) => theme.primary};
 
   padding: 3rem 4rem;
 
-  border: 1px solid var(--gray-400);
-
-  h2 {
-    color: var(--gray-700);
-  }
+  border: 1px solid ${({ theme }) => theme.border};
 `;
 
 export const Tasks = styled.ul`
@@ -57,15 +56,10 @@ export const Tasks = styled.ul`
 
     padding: 0 1rem;
 
-    border: 1px solid var(--gray-400);
+    border: 1px solid ${({ theme }) => theme.border};
 
     &__checkbox {
       pointer-events: none;
-    }
-
-    &__description,
-    &__user-name {
-      color: var(--gray-700);
     }
 
     &__description {
@@ -82,12 +76,14 @@ export const Tasks = styled.ul`
       display: flex;
       align-items: center;
     }
+
+    &:hover {
+      background: ${({ theme }) => theme.secondary};
+    }
   }
 `;
 
 export const OptionsIcon = styled(BsThreeDotsVertical)`
   width: 1.3rem;
   height: 1.3rem;
-
-  fill: var(--gray-600);
 `;

@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import { DefaultTheme } from "../types";
 
 export default createGlobalStyle`
   * {
@@ -49,14 +50,14 @@ export default createGlobalStyle`
   }
 
   body {
-    background: var(--gray-100);
+    background: ${({ theme }: DefaultTheme) => theme.secondary};
     overflow-x: hidden;
   }
 
   body, button, input, select, textarea, label {
     font-family: "Roboto", sans-serif;
     font-size: 1rem;
-    color: var(--gray-700);
+    color: ${({ theme }: DefaultTheme) => theme.text};
 
   }
 

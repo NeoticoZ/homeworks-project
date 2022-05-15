@@ -6,7 +6,7 @@ export const Container = styled.button`
   width: 3.2rem;
   height: 3.2rem;
 
-  background: var(--white);
+  background: ${({ theme }) => theme.primary};
 
   border-radius: 50%;
 
@@ -29,7 +29,7 @@ export const Container = styled.button`
     width: 0.8rem;
     height: 0.8rem;
 
-    border: 2px solid var(--gray-100);
+    border: 2px solid ${({ theme }) => theme.secondary};
     border-radius: 50%;
 
     position: absolute;

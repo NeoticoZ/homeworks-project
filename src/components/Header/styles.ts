@@ -4,11 +4,11 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { FaMoon, FaSun } from "react-icons/fa";
 
 export const Container = styled.header`
-  background: var(--white);
+  background: ${({ theme }) => theme.primary};
 
   height: 3.5rem;
 
-  border-bottom: 1px solid var(--gray-400);
+  border-bottom: 1px solid ${({ theme }) => theme.border};
 `;
 
 export const Wrapper = styled.div`
@@ -23,8 +23,6 @@ export const Wrapper = styled.div`
 
   .text {
     font-size: 1.2rem;
-
-    color: var(--gray-700);
   }
 
   .dark {
@@ -44,7 +42,6 @@ export const Wrapper = styled.div`
     }
 
     &__label {
-      color: var(--gray-700);
       font-size: 1.1rem;
     }
 
@@ -84,7 +81,7 @@ export const HamburgerIcon = styled(GiHamburgerMenu)`
   width: 1.8rem;
   height: 1.8rem;
 
-  fill: var(--gray-700);
+  fill: ${({ theme }) => theme.text};
 `;
 
 export const MoonIcon = styled(FaMoon)`

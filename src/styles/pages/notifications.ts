@@ -7,11 +7,11 @@ export const Container = styled.main`
 `;
 
 export const Wrapper = styled.div`
-  background: var(--white);
+  background: ${({ theme }) => theme.primary};
 
   padding: 3rem 4rem;
 
-  border: 1px solid var(--gray-400);
+  border: 1px solid ${({ theme }) => theme.border};
 
   .title {
     margin-bottom: 1rem;

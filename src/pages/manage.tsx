@@ -18,36 +18,32 @@ const Manage: NextPage = () => {
   };
 
   return (
-    <>
-      <Header />
+    <Container>
+      <Wrapper>
+        <h2 className="title">Selecione uma ação</h2>
 
-      <Container>
-        <Wrapper>
-          <h2 className="title">Selecione uma ação</h2>
-
-          <div className="buttons">
-            <div className="buttons button-wrapper">
-              <button
-                onClick={toggleTaskModal}
-                className="button-wrapper__button"
-              >
-                Adicionar tarefa
-              </button>
-            </div>
-
-            <span className="buttons__span">ou</span>
-
-            <div className="buttons button-wrapper">
-              <button
-                onClick={toggleNotificationModal}
-                className="button-wrapper__button"
-              >
-                Adicionar aviso
-              </button>
-            </div>
+        <div className="buttons">
+          <div className="buttons button-wrapper">
+            <button
+              onClick={toggleTaskModal}
+              className="button-wrapper__button"
+            >
+              Adicionar tarefa
+            </button>
           </div>
-        </Wrapper>
-      </Container>
+
+          <span className="buttons__span">ou</span>
+
+          <div className="buttons button-wrapper">
+            <button
+              onClick={toggleNotificationModal}
+              className="button-wrapper__button"
+            >
+              Adicionar aviso
+            </button>
+          </div>
+        </div>
+      </Wrapper>
 
       <ModalAddTask isOpen={taskModal} setIsOpen={toggleTaskModal} />
 
@@ -55,7 +51,7 @@ const Manage: NextPage = () => {
         isOpen={notificationModal}
         setIsOpen={toggleNotificationModal}
       />
-    </>
+    </Container>
   );
 };
 

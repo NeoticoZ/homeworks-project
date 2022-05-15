@@ -9,9 +9,9 @@ export const Container = styled.div`
 
   overflow: hidden;
 
-  border: 1px solid var(--gray-400);
+  border: 1px solid ${({ theme }) => theme.border};
 
-  transition: height 0.2s;
+  transition: height, background 0.2s;
 
   &.accordion--show {
     height: 7.8rem;
@@ -23,13 +23,14 @@ export const Container = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-
-    svg {
-    }
   }
 
   .accordion__content {
     margin: 1rem 1rem 0;
+  }
+
+  &:hover {
+    background: ${({ theme }) => theme.secondary};
   }
 `;
 

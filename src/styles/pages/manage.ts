@@ -7,14 +7,11 @@ export const Container = styled.main`
 `;
 
 export const Wrapper = styled.div`
-  background: var(--white);
+  background: ${({ theme }) => theme.primary};
 
   padding: 3rem 4rem;
 
-  border: 1px solid var(--gray-400);
-
-  .title {
-  }
+  border: 1px solid ${({ theme }) => theme.border};
 
   .buttons {
     display: flex;
@@ -34,7 +31,7 @@ export const Wrapper = styled.div`
       width: 100%;
       height: 100%;
 
-      border: 1px solid var(--gray-400);
+      border: 1px solid ${({ theme }) => theme.border};
 
       transition: all 0.2s;
 

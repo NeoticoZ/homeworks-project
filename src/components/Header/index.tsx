@@ -1,7 +1,11 @@
 import { useState } from "react";
 import { Container, HamburgerIcon, MoonIcon, SunIcon, Wrapper } from "./styles";
 
-export const Header = () => {
+interface IHeaderProps {
+  toggleTheme: () => void;
+}
+
+export const Header = ({ toggleTheme }: IHeaderProps) => {
   const [inputChecked, setInputChecked] = useState(false);
 
   return (
@@ -24,6 +28,7 @@ export const Header = () => {
             id="toggleDark"
             type="checkbox"
             checked={inputChecked}
+            onClick={toggleTheme}
           />
 
           <label className="toggle-label" htmlFor="toggleDark">

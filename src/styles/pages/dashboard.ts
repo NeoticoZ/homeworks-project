@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
-import { BsThreeDotsVertical } from "react-icons/bs";
+import { BsHandIndexThumb } from "react-icons/bs";
+import { AiOutlinePlusSquare } from "react-icons/ai";
 
 export const Container = styled.main`
   max-width: 900px;
@@ -56,7 +57,9 @@ export const Tasks = styled.ul`
 
     padding: 0 1rem;
 
-    border: 1px solid ${({ theme }) => theme.border};
+    border-radius: 5px;
+
+    transition: 0.1s;
 
     &__checkbox {
       pointer-events: none;
@@ -71,10 +74,20 @@ export const Tasks = styled.ul`
     }
 
     &__option {
-      margin-left: 1rem;
+      margin-left: 2rem;
 
       display: flex;
       align-items: center;
+
+      svg {
+        transition: 0.2s;
+      }
+
+      &:hover {
+        svg {
+          fill: var(--blue);
+        }
+      }
     }
 
     &:hover {
@@ -83,7 +96,12 @@ export const Tasks = styled.ul`
   }
 `;
 
-export const OptionsIcon = styled(BsThreeDotsVertical)`
+export const OptionsIcon = styled(BsHandIndexThumb)`
+  width: 1.3rem;
+  height: 1.3rem;
+`;
+
+export const UncheckedIcon = styled(AiOutlinePlusSquare)`
   width: 1.3rem;
   height: 1.3rem;
 `;

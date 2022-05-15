@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.main`
   width: 100vw;
-  height: 100vh;
+  height: calc(100vh - 3.5rem);
 
   display: flex;
   justify-content: center;
@@ -13,7 +13,7 @@ export const FormWrapper = styled.form`
   max-width: 450px;
   width: 100%;
 
-  background: var(--white);
+  background: ${({ theme }) => theme.primary};
 
   display: flex;
   flex-direction: column;
@@ -33,17 +33,15 @@ export const FormWrapper = styled.form`
     gap: 0.25rem;
 
     &__label {
-      color: var(--gray-700);
       font-size: 0.925rem;
     }
 
     &__input {
       height: 2.8rem;
 
-      background: var(--white);
-      color: var(--gray-700);
+      background: ${({ theme }) => theme.secondary};
 
-      border: 1px solid var(--gray-400);
+      border: 1px solid ${({ theme }) => theme.borderSecondary};
       border-radius: 4px;
 
       padding-left: 0.8rem;
@@ -86,10 +84,6 @@ export const FormWrapper = styled.form`
 
   .navigation {
     margin: 0 auto;
-
-    &__text {
-      color: var(--gray-700);
-    }
 
     &__link {
       color: var(--blue);

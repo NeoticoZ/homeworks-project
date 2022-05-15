@@ -9,9 +9,7 @@ export const Container = styled.div`
 
   overflow: hidden;
 
-  border: 1px solid ${({ theme }) => theme.border};
-
-  transition: height, background 0.2s;
+  transition: height 0.2s;
 
   &.accordion--show {
     height: 7.8rem;
@@ -27,10 +25,6 @@ export const Container = styled.div`
 
   .accordion__content {
     margin: 1rem 1rem 0;
-  }
-
-  &:hover {
-    background: ${({ theme }) => theme.secondary};
   }
 `;
 

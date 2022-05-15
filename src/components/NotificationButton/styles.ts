@@ -16,6 +16,8 @@ export const Container = styled.button`
   right: 4rem;
   bottom: 4rem;
 
+  transition: 0.1s;
+
   &:after {
     content: "1";
 
@@ -39,6 +41,10 @@ export const Container = styled.button`
     padding: 0.1rem;
 
     font-size: 0.7rem;
+  }
+
+  &:hover {
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.4);
   }
 `;
 

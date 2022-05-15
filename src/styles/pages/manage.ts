@@ -21,6 +21,11 @@ export const Wrapper = styled.div`
 
     margin-top: 2rem;
     margin-bottom: 1rem;
+
+    &__span {
+      display: flex;
+      align-items: center;
+    }
   }
 
   .button-wrapper {
@@ -31,7 +36,7 @@ export const Wrapper = styled.div`
       width: 100%;
       height: 100%;
 
-      border: 1px solid ${({ theme }) => theme.border};
+      border: 1px solid ${({ theme }) => theme.borderSecondary};
 
       transition: all 0.2s;
 

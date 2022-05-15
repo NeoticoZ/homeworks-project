@@ -3,6 +3,7 @@ export const lightTheme = {
   secondary: "#f1f3f6",
   text: "#4c4d4d",
   border: "#ced4da",
+  borderSecondary: "#ced4da",
 };
 
 export const darkTheme = {
@@ -10,4 +11,5 @@ export const darkTheme = {
   secondary: "rgb(18, 18, 20)",
   text: "#cccccc",
   border: "#202024",
+  borderSecondary: "#35353b",
 };

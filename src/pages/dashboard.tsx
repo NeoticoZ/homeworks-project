@@ -6,6 +6,7 @@ import {
   OptionsIcon,
   Tab,
   Tasks,
+  UncheckedIcon,
   Wrapper,
 } from "../styles/pages/dashboard";
 
@@ -23,7 +24,7 @@ const Dashboard: NextPage = () => {
 
         <Tasks>
           <li className="task">
-            <input className="task__checkbox" type="checkbox" />
+            <UncheckedIcon className="task__checkbox" type="checkbox" />
             <span className="task__description">Descrição da tarefa</span>
             <span className="task__user-name">Heriks Araujo Dias</span>
             <button className="task__option">
@@ -32,7 +33,7 @@ const Dashboard: NextPage = () => {
           </li>
 
           <li className="task">
-            <input className="task__checkbox" type="checkbox" />
+            <UncheckedIcon className="task__checkbox" type="checkbox" />
             <span className="task__description">Descrição da tarefa</span>
             <span className="task__user-name">Heriks Araujo Dias</span>
             <button className="task__option">
@@ -41,7 +42,7 @@ const Dashboard: NextPage = () => {
           </li>
 
           <li className="task">
-            <input className="task__checkbox" type="checkbox" />
+            <UncheckedIcon className="task__checkbox" type="checkbox" />
             <span className="task__description">Descrição da tarefa</span>
             <span className="task__user-name">Heriks Araujo Dias</span>
             <button className="task__option">

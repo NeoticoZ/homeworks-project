@@ -4,5 +4,6 @@ export interface DefaultTheme {
     secondary: string;
     text: string;
     border: string;
+    borderSecondary: string;
   };
 }

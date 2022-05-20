@@ -1,6 +1,5 @@
 import { NextPage } from "next";
 import { useState } from "react";
-import { Header } from "../components/Header";
 import { ModalAddNotification } from "../components/ModalAddNotification";
 import { ModalAddTask } from "../components/ModalAddTask";
 import { Container, Wrapper } from "../styles/pages/manage";

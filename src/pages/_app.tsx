@@ -4,6 +4,7 @@ import { lightTheme, darkTheme } from "../styles/themes";
 import GlobalStyles from "../styles/global";
 import { useEffect, useState } from "react";
 import { Header } from "../components/Header";
+import { AuthProvider } from "../hooks/useAuth";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [theme, setTheme] = useState("light");
@@ -22,9 +23,11 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
-      <Header toggleTheme={toggleTheme} theme={theme} />
+      <AuthProvider>
+        <Header toggleTheme={toggleTheme} theme={theme} />
 
-      <Component {...pageProps} />
+        <Component {...pageProps} />
+      </AuthProvider>
 
       <GlobalStyles />
     </ThemeProvider>

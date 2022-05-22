@@ -2,11 +2,16 @@ import { NextPage } from "next";
 import { useState } from "react";
 import { ModalAddNotification } from "../components/ModalAddNotification";
 import { ModalAddTask } from "../components/ModalAddTask";
+import { useAuth } from "../hooks/useAuth";
 import { Container, Wrapper } from "../styles/pages/manage";
 
 const Manage: NextPage = () => {
   const [taskModal, setTaskModalOpen] = useState(false);
   const [notificationModal, setNotificationModalOpen] = useState(false);
+
+  const { user, isAuthenticated } = useAuth();
+
+  const userCanAccess = isAuthenticated && user.admin;
 
   const toggleTaskModal = () => {
     setTaskModalOpen(!taskModal);

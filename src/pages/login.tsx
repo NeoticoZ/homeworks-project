@@ -1,8 +1,9 @@
 import Link from "next/link";
-import { NextPage } from "next/types";
+import { GetServerSideProps, NextPage } from "next/types";
 import { useState } from "react";
 import { useAuth } from "../hooks/useAuth";
 import { FormWrapper, Container } from "../styles/pages/login";
+import { withSSRGuest } from "../utils/withSSRGuest";
 
 const Login: NextPage = () => {
   const [email, setEmail] = useState("");
@@ -71,5 +72,11 @@ const Login: NextPage = () => {
     </Container>
   );
 };
+
+// export const getServerSideProps: GetServerSideProps = withSSRGuest(
+//   async (ctx) => {
+//     return { props: {} };
+//   }
+// );
 
 export default Login;

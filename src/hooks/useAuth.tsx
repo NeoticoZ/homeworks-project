@@ -1,7 +1,7 @@
 import Router from "next/router";
-import { setCookie } from "nookies";
-import { createContext, useContext, useState } from "react";
-import { api } from "../services/api";
+import { destroyCookie, parseCookies, setCookie } from "nookies";
+import { createContext, useContext, useEffect, useState } from "react";
+import { api } from "../services/apiClient";
 
 interface IAuthProvider {
   children: React.ReactNode;
@@ -25,27 +25,77 @@ interface ISignInCredentials {
 interface IAuthContextData {
   user: IUser;
   signIn(credentials: ISignInCredentials): Promise<void>;
+  signOut(): void;
   isAuthenticated: boolean;
 }
 
 export const AuthContext = createContext({} as IAuthContextData);
 
+let authChannel: BroadcastChannel;
+
+export const signOut = () => {
+  destroyCookie(undefined, "token");
+  destroyCookie(undefined, "refreshToken");
+
+  authChannel.postMessage("signOut");
+
+  Router.push("/");
+};
+
 export const AuthProvider = ({ children }: IAuthProvider) => {
   const [user, setUser] = useState({} as IUser);
   const isAuthenticated = !!user;
+
+  useEffect(() => {
+    authChannel = new BroadcastChannel("auth");
+
+    authChannel.onmessage = (message) => {
+      switch (message.data) {
+        case "signOut":
+          signOut();
+          break;
+        default:
+          break;
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    const { token } = parseCookies();
+
+    if (token) {
+      api
+        .get("/user")
+        .then((response) => {
+          const user = response.data;
+
+          setUser(user);
+        })
+        .catch(() => {
+          signOut();
+        });
+    }
+  }, []);
 
   const signIn = async ({ email, password }: ISignInCredentials) => {
     try {
       const response = await api.post("/login", { email, password });
 
-      const { token, user } = response.data;
+      const { token, refreshToken, user } = response.data;
 
       setCookie(null, "token", token, {
-        maxAge: 30 * 24 * 60 * 60,
+        maxAge: 30 * 24 * 60 * 60, // 30 days
+        path: "/",
+      });
+
+      setCookie(null, "refreshToken", refreshToken, {
+        maxAge: 30 * 24 * 60 * 60, // 30 days
         path: "/",
       });
 
       setUser(user);
+
+      api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
       Router.push("/dashboard");
     } catch (err: any) {
@@ -54,7 +104,7 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
   };
 
   return (
-    <AuthContext.Provider value={{ signIn, isAuthenticated, user }}>
+    <AuthContext.Provider value={{ signIn, signOut, isAuthenticated, user }}>
       {children}
     </AuthContext.Provider>
   );

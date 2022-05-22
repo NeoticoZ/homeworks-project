@@ -1,6 +1,7 @@
 import { NextPage } from "next";
 import { Header } from "../components/Header";
 import { NotificationButton } from "../components/NotificationButton";
+import { setupAPIClient } from "../services/api";
 import {
   Container,
   OptionsIcon,
@@ -9,6 +10,7 @@ import {
   UncheckedIcon,
   Wrapper,
 } from "../styles/pages/dashboard";
+import { withSSRAuth } from "../utils/withSSRAuth";
 
 const Dashboard: NextPage = () => {
   return (
@@ -56,5 +58,16 @@ const Dashboard: NextPage = () => {
     </Container>
   );
 };
+
+export const getServerSideProps = withSSRAuth(async (ctx: any) => {
+  const apiClient = setupAPIClient(ctx);
+  const response = await apiClient.get("/user");
+
+  console.log(response.data);
+
+  return {
+    props: {},
+  };
+});
 
 export default Dashboard;

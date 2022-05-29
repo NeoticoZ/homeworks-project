@@ -22,6 +22,8 @@ export const Container = styled.button<Props>`
 
   transition: 0.1s;
 
+  display: ${(props) => (props.notificationsAmount !== "0" ? "block" : "none")};
+
   &:after {
     content: "${(props) => props.notificationsAmount}";
 

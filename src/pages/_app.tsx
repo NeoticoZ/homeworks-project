@@ -8,6 +8,7 @@ import { AuthProvider } from "../hooks/useAuth";
 import { ToastContainer } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
+import ErrorBoundary from "../components/ErrorBoundary";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [theme, setTheme] = useState("light");
@@ -27,11 +28,13 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
       <AuthProvider>
-        <Header toggleTheme={toggleTheme} theme={theme} />
+        <ErrorBoundary>
+          <Header toggleTheme={toggleTheme} theme={theme} />
 
-        <Component {...pageProps} />
+          <Component {...pageProps} />
 
-        <ToastContainer theme="colored" />
+          <ToastContainer theme="colored" />
+        </ErrorBoundary>
       </AuthProvider>
 
       <GlobalStyles />

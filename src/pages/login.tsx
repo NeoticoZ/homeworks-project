@@ -3,7 +3,6 @@ import { GetServerSideProps, NextPage } from "next/types";
 import { useState } from "react";
 import { useAuth } from "../hooks/useAuth";
 import { FormWrapper, Container } from "../styles/pages/login";
-import { withSSRGuest } from "../utils/withSSRGuest";
 import { withSSRLogged } from "../utils/withSSRLogged";
 
 const Login: NextPage = () => {

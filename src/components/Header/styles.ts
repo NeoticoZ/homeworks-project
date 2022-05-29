@@ -8,21 +8,23 @@ export const Container = styled.header`
 
   height: 3.5rem;
 
-  border-bottom: 1px solid ${({ theme }) => theme.border};
+  border-bottom: 1px solid ${({ theme }) => theme.borderSecondary};
 `;
 
 export const Wrapper = styled.div`
   max-width: 1280px;
   height: 100%;
 
-  margin: 0 auto;
-
   display: flex;
   align-items: center;
   gap: 2rem;
 
+  margin: 0 1rem;
+
   .text {
     font-size: 1.2rem;
+
+    display: none;
   }
 
   .dark {
@@ -74,6 +76,16 @@ export const Wrapper = styled.div`
         }
       }
     }
+  }
+
+  @media (min-width: 500px) {
+    .text {
+      display: block;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    margin: 0 auto;
   }
 `;
 

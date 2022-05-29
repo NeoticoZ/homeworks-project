@@ -1,6 +1,8 @@
 import { NextPage } from "next";
 import Link from "next/link";
+import Router from "next/router";
 import { Container, Wrapper } from "../styles/pages/home";
+import { withSSRLogged } from "../utils/withSSRLogged";
 
 const Home: NextPage = () => {
   return (
@@ -21,5 +23,11 @@ const Home: NextPage = () => {
     </Container>
   );
 };
+
+export const getServerSideProps = withSSRLogged(async (ctx) => {
+  return {
+    props: {},
+  };
+});
 
 export default Home;

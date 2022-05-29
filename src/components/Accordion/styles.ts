@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
 export const Container = styled.div`
-  height: 3rem;
+  height: 4rem;
 
   padding: 0.8rem;
 
@@ -11,9 +11,7 @@ export const Container = styled.div`
 
   transition: height 0.2s;
 
-  &.accordion--show {
-    height: 7.8rem;
-  }
+  border-bottom: 1px solid ${({ theme }) => theme.borderSecondary};
 
   .accordion__button {
     width: 100%;
@@ -24,7 +22,18 @@ export const Container = styled.div`
   }
 
   .accordion__content {
-    margin: 1rem 1rem 0;
+    height: 4rem;
+
+    margin: 2rem 1rem 0;
+    overflow-y: auto;
+  }
+
+  &.accordion--show {
+    height: 7.8rem;
+  }
+
+  @media (min-width: 768px) {
+    height: 3rem;
   }
 `;
 

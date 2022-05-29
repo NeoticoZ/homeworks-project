@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import ReactModal from "react-modal";
+import { useTheme } from "styled-components";
 
 interface IModalProps {
   children: React.ReactNode;
@@ -9,6 +10,8 @@ interface IModalProps {
 
 export const Modal = ({ children, isOpen, setIsOpen }: IModalProps) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  const theme: any = useTheme();
 
   useEffect(() => {
     if (isOpen !== modalIsOpen) {
@@ -23,7 +26,7 @@ export const Modal = ({ children, isOpen, setIsOpen }: IModalProps) => {
       ariaHideApp={false}
       style={{
         content: {
-          width: "50%",
+          width: "auto",
           minWidth: "300px",
           top: "50%",
           left: "50%",
@@ -31,7 +34,7 @@ export const Modal = ({ children, isOpen, setIsOpen }: IModalProps) => {
           bottom: "auto",
           marginRight: "-50%",
           transform: "translate(-50%, -50%)",
-          background: "#ffffff",
+          background: `${theme.primary}`,
           color: "#000000",
           borderRadius: "8px",
           border: "none",

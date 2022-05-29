@@ -1,6 +1,7 @@
 import Router from "next/router";
 import { destroyCookie, parseCookies, setCookie } from "nookies";
 import { createContext, useContext, useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import { api } from "../services/apiClient";
 
 interface IAuthProvider {
@@ -22,9 +23,16 @@ interface ISignInCredentials {
   password: string;
 }
 
+interface ISignUpCredentials {
+  name: string;
+  email: string;
+  password: string;
+}
+
 interface IAuthContextData {
   user: IUser;
   signIn(credentials: ISignInCredentials): Promise<void>;
+  signUp(credentials: ISignUpCredentials): Promise<void>;
   signOut(): void;
   isAuthenticated: boolean;
 }
@@ -53,6 +61,7 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
       switch (message.data) {
         case "signOut":
           signOut();
+          setUser({} as IUser);
           break;
         default:
           break;
@@ -99,12 +108,40 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
 
       Router.push("/dashboard");
     } catch (err: any) {
-      console.log(err.response.data.error);
+      toast.error(err.message);
+    }
+  };
+
+  const signUp = async ({ name, email, password }: ISignUpCredentials) => {
+    try {
+      const response = await api.post("/register", { name, email, password });
+
+      const { token, refreshToken, user } = response.data;
+
+      setCookie(null, "token", token, {
+        maxAge: 30 * 24 * 60 * 60, // 30 days
+        path: "/",
+      });
+
+      setCookie(null, "refreshToken", refreshToken, {
+        maxAge: 30 * 24 * 60 * 60, // 30 days
+        path: "/",
+      });
+
+      setUser(user);
+
+      api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+
+      Router.push("/dashboard");
+    } catch (err: any) {
+      toast.error(err.message);
     }
   };
 
   return (
-    <AuthContext.Provider value={{ signIn, signOut, isAuthenticated, user }}>
+    <AuthContext.Provider
+      value={{ signIn, signUp, signOut, isAuthenticated, user }}
+    >
       {children}
     </AuthContext.Provider>
   );

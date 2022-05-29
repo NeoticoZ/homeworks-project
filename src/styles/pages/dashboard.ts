@@ -1,19 +1,27 @@
 import styled from "styled-components";
 
 import { BsHandIndexThumb } from "react-icons/bs";
-import { AiOutlinePlusSquare } from "react-icons/ai";
+import { BiSquare } from "react-icons/bi";
+import { FcCheckmark } from "react-icons/fc";
+import { IoMdCheckboxOutline } from "react-icons/io";
 
 export const Container = styled.main`
   max-width: 900px;
 
-  margin: 4rem auto;
+  margin: 4rem 1rem;
+
+  @media (min-width: 900px) {
+    margin: 4rem auto;
+  }
 `;
 
 export const Tab = styled.div`
+  display: flex;
+
   button {
     background: ${({ theme }) => theme.primary};
 
-    padding: 0.8rem 2rem;
+    padding: 0.8rem 1rem;
 
     border-right: 1px solid ${({ theme }) => theme.border};
     border-top: 1px solid ${({ theme }) => theme.border};
@@ -31,14 +39,32 @@ export const Tab = styled.div`
       background: ${({ theme }) => theme.secondary};
     }
   }
+
+  @media (max-width: 500px) {
+    button {
+      width: 100%;
+
+      padding: 0.8rem 0;
+    }
+  }
+
+  @media (min-width: 500px) {
+    button {
+      padding: 0.8rem 2rem;
+    }
+  }
 `;
 
 export const Wrapper = styled.section`
   background: ${({ theme }) => theme.primary};
 
-  padding: 3rem 4rem;
+  padding: 2rem;
 
   border: 1px solid ${({ theme }) => theme.border};
+
+  @media (min-width: 768px) {
+    padding: 3rem 4rem;
+  }
 `;
 
 export const Tasks = styled.ul`
@@ -90,8 +116,12 @@ export const Tasks = styled.ul`
       }
     }
 
-    &:hover {
-      background: ${({ theme }) => theme.secondary};
+    &--done {
+      opacity: 0.6;
+
+      .task__option {
+        pointer-events: none;
+      }
     }
   }
 `;
@@ -101,7 +131,17 @@ export const OptionsIcon = styled(BsHandIndexThumb)`
   height: 1.3rem;
 `;
 
-export const UncheckedIcon = styled(AiOutlinePlusSquare)`
+export const UncheckedIcon = styled(BiSquare)`
   width: 1.3rem;
   height: 1.3rem;
+`;
+
+export const CheckedIcon = styled(FcCheckmark)`
+  width: 1.3rem;
+  height: 1.3rem;
+`;
+
+export const CheckboxIcon = styled(IoMdCheckboxOutline)`
+  width: 1.5rem;
+  height: 1.5rem;
 `;

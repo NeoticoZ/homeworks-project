@@ -1,8 +1,13 @@
 import { NextPage } from "next";
-import { Header } from "../components/Header";
+import Router from "next/router";
+import { useState } from "react";
+import { ModalAcceptTask } from "../components/ModalAcceptTask";
 import { NotificationButton } from "../components/NotificationButton";
 import { setupAPIClient } from "../services/api";
+import { api } from "../services/apiClient";
 import {
+  CheckboxIcon,
+  CheckedIcon,
   Container,
   OptionsIcon,
   Tab,
@@ -12,61 +17,135 @@ import {
 } from "../styles/pages/dashboard";
 import { withSSRAuth } from "../utils/withSSRAuth";
 
-const Dashboard: NextPage = () => {
+interface ITask {
+  id: string;
+  name: string;
+  status: string;
+  assignedTo: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+interface ITasks {
+  tasks: ITask[];
+}
+
+const Dashboard: NextPage<ITasks> = ({ tasks }) => {
+  const [taskModal, setTaskModalOpen] = useState(false);
+  const [taskId, setTaskId] = useState("");
+  const [taskPage, setTaskPage] = useState("open");
+
+  const toggleTaskModal = () => {
+    setTaskModalOpen(!taskModal);
+  };
+
+  const handleTaskClick = async (id: string) => {
+    setTaskId(id);
+
+    if (taskPage === "open") {
+      toggleTaskModal();
+    } else if (taskPage === "doing") {
+      await api.patch("/task", {
+        taskId: id,
+        status: "done",
+      });
+
+      Router.reload();
+    }
+  };
+
+  const date = new Date();
+
+  const actualDate = `${date.getDate()}/0${
+    date.getMonth() + 1
+  }/${date.getFullYear()}`;
+
   return (
     <Container>
       <Tab>
-        <button className="active">Tarefas</button>
-        <button>Em andamento</button>
-        <button>Concluídas</button>
+        <button
+          onClick={() => setTaskPage("open")}
+          className={taskPage === "open" ? "active" : ""}
+        >
+          Tarefas
+        </button>
+        <button
+          onClick={() => setTaskPage("doing")}
+          className={taskPage === "doing" ? "active" : ""}
+        >
+          Em andamento
+        </button>
+        <button
+          onClick={() => setTaskPage("done")}
+          className={taskPage === "done" ? "active" : ""}
+        >
+          Concluídas
+        </button>
       </Tab>
 
       <Wrapper>
-        <h2>Tarefas dia 07/05/2022</h2>
+        <h2>Tarefas dia {actualDate}</h2>
 
         <Tasks>
-          <li className="task">
-            <UncheckedIcon className="task__checkbox" type="checkbox" />
-            <span className="task__description">Descrição da tarefa</span>
-            <span className="task__user-name">Heriks Araujo Dias</span>
-            <button className="task__option">
-              <OptionsIcon />
-            </button>
-          </li>
+          {tasks.map(
+            (task) =>
+              task.status === taskPage && (
+                <li
+                  key={task.id}
+                  className={`task ${
+                    task.status === "done" ? "task--done" : ""
+                  }`}
+                >
+                  <UncheckedIcon className="task__checkbox" type="checkbox" />
 
-          <li className="task">
-            <UncheckedIcon className="task__checkbox" type="checkbox" />
-            <span className="task__description">Descrição da tarefa</span>
-            <span className="task__user-name">Heriks Araujo Dias</span>
-            <button className="task__option">
-              <OptionsIcon />
-            </button>
-          </li>
+                  <span className="task__description">{task.name}</span>
 
-          <li className="task">
-            <UncheckedIcon className="task__checkbox" type="checkbox" />
-            <span className="task__description">Descrição da tarefa</span>
-            <span className="task__user-name">Heriks Araujo Dias</span>
-            <button className="task__option">
-              <OptionsIcon />
-            </button>
-          </li>
+                  <span className="task__user-name">
+                    {task.assignedTo === "all" ? "" : task.assignedTo}
+                  </span>
+
+                  <button
+                    onClick={() => handleTaskClick(task.id)}
+                    className="task__option"
+                  >
+                    {task.status === "open" && <OptionsIcon />}
+                    {task.status === "doing" && <CheckboxIcon />}
+                    {task.status === "done" && <CheckedIcon />}
+                  </button>
+                </li>
+              )
+          )}
         </Tasks>
       </Wrapper>
 
       <NotificationButton />
+
+      <ModalAcceptTask
+        isOpen={taskModal}
+        setIsOpen={toggleTaskModal}
+        taskId={taskId}
+      />
     </Container>
   );
 };
 
 export const getServerSideProps = withSSRAuth(async (ctx: any) => {
   const apiClient = setupAPIClient(ctx);
-  const response = await apiClient.get("/user");
+  const tasks = await apiClient.get("/tasks");
 
-  console.log(response.data);
+  const date = new Date();
+  const actualDate = date.getDate();
+
+  const tasksFiltered = tasks.data.filter((task: ITask) => {
+    const taskDate = new Date(task.createdAt).getDate();
+
+    return taskDate === actualDate;
+  });
 
   return {
-    props: {},
+    props: {
+      tasks: tasksFiltered,
+    },
   };
 });
 

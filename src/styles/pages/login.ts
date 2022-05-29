@@ -37,11 +37,11 @@ export const FormWrapper = styled.form`
     }
 
     &__input {
-      height: 2.8rem;
+      height: 3rem;
 
       background: ${({ theme }) => theme.secondary};
 
-      border: 1px solid ${({ theme }) => theme.borderSecondary};
+      border: 1px solid ${({ theme }) => theme.border};
       border-radius: 4px;
 
       padding-left: 0.8rem;

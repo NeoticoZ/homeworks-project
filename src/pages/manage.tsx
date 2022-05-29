@@ -2,16 +2,13 @@ import { NextPage } from "next";
 import { useState } from "react";
 import { ModalAddNotification } from "../components/ModalAddNotification";
 import { ModalAddTask } from "../components/ModalAddTask";
-import { useAuth } from "../hooks/useAuth";
+import { setupAPIClient } from "../services/api";
 import { Container, Wrapper } from "../styles/pages/manage";
+import { withSSRAuth } from "../utils/withSSRAuth";
 
 const Manage: NextPage = () => {
   const [taskModal, setTaskModalOpen] = useState(false);
   const [notificationModal, setNotificationModalOpen] = useState(false);
-
-  const { user, isAuthenticated } = useAuth();
-
-  const userCanAccess = isAuthenticated && user.admin;
 
   const toggleTaskModal = () => {
     setTaskModalOpen(!taskModal);
@@ -58,5 +55,23 @@ const Manage: NextPage = () => {
     </Container>
   );
 };
+
+export const getServerSideProps = withSSRAuth(async (ctx: any) => {
+  const apiClient = setupAPIClient(ctx);
+  const user = await apiClient.get("/user");
+
+  if (!user.data.admin) {
+    return {
+      redirect: {
+        destination: "/dashboard",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
+});
 
 export default Manage;

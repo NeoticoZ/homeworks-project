@@ -9,16 +9,20 @@ export const Container = styled.main`
 
 export const Wrapper = styled.section`
   max-width: 1280px;
-  margin: 0 auto;
+
+  margin: 0 1rem;
 
   padding: 4rem 0;
 
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 1.5rem;
 
+  text-align: center;
+
   .title {
-    font-size: 3.5rem;
+    font-size: 3.25rem;
   }
 
   .paragraph {
@@ -31,7 +35,7 @@ export const Wrapper = styled.section`
   .link {
     margin-top: 1rem;
 
-    width: 10rem;
+    width: 15rem;
     height: 3rem;
 
     display: flex;
@@ -45,5 +49,23 @@ export const Wrapper = styled.section`
     font-size: 1.25rem;
 
     border-radius: 5px;
+  }
+
+  @media (min-width: 500px) {
+    align-items: flex-start;
+
+    text-align: initial;
+
+    .title {
+      font-size: 3.5rem;
+    }
+
+    .link {
+      width: 10rem;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    margin: 0 auto;
   }
 `;

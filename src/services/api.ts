@@ -10,7 +10,7 @@ export function setupAPIClient(ctx = undefined) {
   let cookies = parseCookies(ctx);
 
   const api = axios.create({
-    baseURL: "http://localhost:3333",
+    baseURL: "https://powerful-reef-62654.herokuapp.com/",
     headers: {
       Authorization: `Bearer ${cookies["token"]}`,
     },
@@ -22,7 +22,7 @@ export function setupAPIClient(ctx = undefined) {
     },
     (error: any) => {
       if (error.response.status === 401) {
-        if (error.response.data?.code === "token.expired") {
+        if (error.response.data.code === "token.expired") {
           cookies = parseCookies(ctx);
 
           const { refreshToken } = cookies;
@@ -32,7 +32,7 @@ export function setupAPIClient(ctx = undefined) {
             isRefreshing = true;
 
             api
-              .post("/refresh-token", { refreshToken })
+              .post("/refresh-token", { refresh_token: refreshToken })
               .then((response) => {
                 const { token } = response.data;
 

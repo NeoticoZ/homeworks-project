@@ -1,11 +1,31 @@
 import Link from "next/link";
 import { NextPage } from "next/types";
+import { useState } from "react";
+import { useAuth } from "../hooks/useAuth";
 import { FormWrapper, Container } from "../styles/pages/login";
+import { withSSRLogged } from "../utils/withSSRLogged";
 
 const Register: NextPage = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const { signUp } = useAuth();
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const userData = {
+      name,
+      email,
+      password,
+    };
+
+    signUp(userData);
+  };
   return (
     <Container>
-      <FormWrapper>
+      <FormWrapper onSubmit={handleSubmit}>
         <div className="user">
           <label className="user__label" htmlFor="userName">
             Nome
@@ -16,6 +36,9 @@ const Register: NextPage = () => {
             type="text"
             id="userName"
             placeholder="Digite seu nome..."
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
           />
         </div>
 
@@ -29,6 +52,9 @@ const Register: NextPage = () => {
             type="email"
             id="userMail"
             placeholder="Digite seu email..."
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
           />
         </div>
 
@@ -42,10 +68,15 @@ const Register: NextPage = () => {
             type="password"
             id="userPassword"
             placeholder="Digite sua senha..."
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
           />
         </div>
 
-        <button className="button">Entrar</button>
+        <button type="submit" className="button">
+          Cadastrar
+        </button>
 
         <div className="navigation">
           <span className="navigation__text">Já tem uma conta?</span>
@@ -58,5 +89,11 @@ const Register: NextPage = () => {
     </Container>
   );
 };
+
+export const getServerSideProps = withSSRLogged(async (ctx) => {
+  return {
+    props: {},
+  };
+});
 
 export default Register;

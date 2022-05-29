@@ -5,6 +5,9 @@ import GlobalStyles from "../styles/global";
 import { useEffect, useState } from "react";
 import { Header } from "../components/Header";
 import { AuthProvider } from "../hooks/useAuth";
+import { ToastContainer } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [theme, setTheme] = useState("light");
@@ -27,6 +30,8 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Header toggleTheme={toggleTheme} theme={theme} />
 
         <Component {...pageProps} />
+
+        <ToastContainer theme="colored" />
       </AuthProvider>
 
       <GlobalStyles />

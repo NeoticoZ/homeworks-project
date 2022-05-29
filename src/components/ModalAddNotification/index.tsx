@@ -1,5 +1,6 @@
-import { title } from "process";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
+import { toast } from "react-toastify";
+import { api } from "../../services/apiClient";
 import { Modal } from "../Modal";
 import { FormTitle, Container } from "./styles";
 
@@ -15,11 +16,29 @@ export const ModalAddNotification = ({
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
+  const handleCreateNotification = async (e: FormEvent) => {
+    e.preventDefault();
+
+    await api
+      .post("/notification", {
+        title,
+        description,
+      })
+      .then(() => {
+        toast.success("Aviso criado com sucesso");
+      })
+      .catch((err) => {
+        toast.error(err.message);
+      });
+
+    setIsOpen();
+  };
+
   return (
     <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
       <FormTitle>Adicionar aviso</FormTitle>
 
-      <Container>
+      <Container onSubmit={handleCreateNotification}>
         <div className="input-wrapper">
           <label className="input-wrapper__label" htmlFor="title">
             Título <span>*</span>
@@ -49,23 +68,24 @@ export const ModalAddNotification = ({
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             rows={8}
+            required
           />
         </div>
 
         <div className="buttons-wrapper">
-          <button
-            className="buttons-wrapper__button buttons-wrapper__button--add"
-            type="button"
-          >
-            Adicionar
-          </button>
-
           <button
             className="buttons-wrapper__button buttons-wrapper__button--cancel"
             type="button"
             onClick={setIsOpen}
           >
             Cancelar
+          </button>
+
+          <button
+            className="buttons-wrapper__button buttons-wrapper__button--add"
+            type="submit"
+          >
+            Adicionar
           </button>
         </div>
       </Container>

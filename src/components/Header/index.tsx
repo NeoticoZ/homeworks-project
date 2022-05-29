@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { useAuth } from "../../hooks/useAuth";
+import { DropNavigation } from "../DropNavigation";
 import { Container, HamburgerIcon, MoonIcon, SunIcon, Wrapper } from "./styles";
 
 interface IHeaderProps {
@@ -8,6 +10,9 @@ interface IHeaderProps {
 
 export const Header = ({ toggleTheme, theme }: IHeaderProps) => {
   const [inputChecked, setInputChecked] = useState(false);
+  const [showNavigation, setShowNavigation] = useState(false);
+
+  const { user } = useAuth();
 
   useEffect(() => {
     if (theme === "dark") {
@@ -17,14 +22,20 @@ export const Header = ({ toggleTheme, theme }: IHeaderProps) => {
     }
   }, [theme]);
 
+  const handleShowDropNavigation = () => {
+    setShowNavigation(!showNavigation);
+  };
+
   return (
     <Container>
       <Wrapper>
-        <button className="button">
+        <button onClick={handleShowDropNavigation} className="button">
           <HamburgerIcon />
         </button>
 
-        <span className="text">Seja bem-vindo, Fulano!</span>
+        <span className="text">
+          {user.id ? `Seja bem-vindo, ${user.name}!` : ""}
+        </span>
 
         <div className="dark">
           <label className="dark__label" htmlFor="toggleDark">
@@ -50,6 +61,11 @@ export const Header = ({ toggleTheme, theme }: IHeaderProps) => {
             <SunIcon />
           </label>
         </div>
+
+        <DropNavigation
+          isOpen={showNavigation}
+          setIsOpen={handleShowDropNavigation}
+        />
       </Wrapper>
     </Container>
   );

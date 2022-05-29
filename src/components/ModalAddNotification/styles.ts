@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const FormTitle = styled.h2`
-  color: var(--gray-700);
+  color: ${({ theme }) => theme.text};
 
   display: flex;
   align-items: center;
@@ -9,6 +9,8 @@ export const FormTitle = styled.h2`
 `;
 
 export const Container = styled.form`
+  width: 100%;
+
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -31,24 +33,20 @@ export const Container = styled.form`
     &__input {
       width: 100%;
 
-      background: var(--white);
+      background: ${({ theme }) => theme.secondary};
 
-      border: 1px solid var(--gray-400);
+      border: 1px solid ${({ theme }) => theme.border};
       border-radius: 0.25rem;
 
       padding: 0.5rem;
 
       &--title {
-        height: 2.5rem;
+        height: 3rem;
       }
 
       &:focus {
         outline: 2px solid rgba(var(--blue-rgb), 0.4);
         outline-offset: -1px;
-      }
-
-      &::placeholder {
-        color: var(--gray-500);
       }
     }
   }
@@ -72,9 +70,7 @@ export const Container = styled.form`
       }
 
       &--cancel {
-        background: var(--gray-100);
-
-        border: 1px solid var(--gray-400);
+        border: 1px solid ${({ theme }) => theme.borderSecondary};
       }
 
       &:focus {
@@ -86,5 +82,9 @@ export const Container = styled.form`
         filter: opacity(0.8);
       }
     }
+  }
+
+  @media (min-width: 500px) {
+    width: 50vw;
   }
 `;

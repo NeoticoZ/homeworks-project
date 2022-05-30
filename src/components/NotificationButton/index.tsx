@@ -12,7 +12,7 @@ interface INotification {
 }
 
 export const NotificationButton = () => {
-  const [notifications, setNotifications] = useState("");
+  const [notifications, setNotifications] = useState("0");
 
   const date = new Date();
 

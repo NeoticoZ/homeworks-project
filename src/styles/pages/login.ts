@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import { CgSpinner } from "react-icons/cg";
+
 export const Container = styled.main`
   width: 100vw;
   height: calc(100vh - 3.5rem);
@@ -53,6 +55,15 @@ export const FormWrapper = styled.form`
     }
   }
 
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
   .button {
     height: 2.8rem;
 
@@ -63,7 +74,16 @@ export const FormWrapper = styled.form`
 
     margin-top: 0.5rem;
 
-    transition: background 0.2s;
+    transition: opacity 0.2s;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      display: none;
+      animation: spin 1s linear infinite;
+    }
 
     &:focus {
       outline: 4px solid rgba(var(--blue-rgb), 0.5);
@@ -75,10 +95,19 @@ export const FormWrapper = styled.form`
     }
 
     &:hover {
-      background: transparent;
-      color: var(--blue);
+      opacity: 0.8;
 
       border: 1px solid var(--blue);
+    }
+
+    &--submitting {
+      span {
+        display: none;
+      }
+
+      svg {
+        display: block;
+      }
     }
   }
 
@@ -100,4 +129,11 @@ export const FormWrapper = styled.form`
       }
     }
   }
+`;
+
+export const SpinnerIcon = styled(CgSpinner)`
+  width: 1.5rem;
+  height: 1.5rem;
+
+  fill: var(--white);
 `;

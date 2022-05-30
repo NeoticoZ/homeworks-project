@@ -2,16 +2,19 @@ import Link from "next/link";
 import { GetServerSideProps, NextPage } from "next/types";
 import { useState } from "react";
 import { useAuth } from "../hooks/useAuth";
-import { FormWrapper, Container } from "../styles/pages/login";
+import { FormWrapper, Container, SpinnerIcon } from "../styles/pages/login";
 import { withSSRLogged } from "../utils/withSSRLogged";
 
 const Login: NextPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const { signIn } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    setIsSubmitting(true);
+
     e.preventDefault();
 
     const userData = {
@@ -20,6 +23,10 @@ const Login: NextPage = () => {
     };
 
     signIn(userData);
+
+    setTimeout(() => {
+      setIsSubmitting(false);
+    }, 3000);
   };
 
   return (
@@ -57,8 +64,12 @@ const Login: NextPage = () => {
           />
         </div>
 
-        <button type="submit" className="button">
-          Entrar
+        <button
+          type="submit"
+          className={`button ${isSubmitting ? "button--submitting" : ""}`}
+        >
+          <span>Entrar</span>
+          <SpinnerIcon />
         </button>
 
         <div className="navigation">

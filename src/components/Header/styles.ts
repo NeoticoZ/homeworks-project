@@ -39,7 +39,7 @@ export const Wrapper = styled.div`
       background: var(--blue);
       position: absolute;
       top: 0;
-      left: 0;
+      left: -5rem;
       opacity: 0;
     }
 

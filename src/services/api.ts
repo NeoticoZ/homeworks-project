@@ -83,10 +83,8 @@ export function setupAPIClient(ctx = undefined) {
             });
           });
         } else {
-          if (typeof window) {
+          if (typeof window === "undefined") {
             signOut();
-          } else {
-            return Promise.reject(new AuthTokenError());
           }
         }
       }

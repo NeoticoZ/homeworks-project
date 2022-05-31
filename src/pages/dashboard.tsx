@@ -98,7 +98,7 @@ const Dashboard: NextPage<ITasks> = ({ tasks }) => {
                 >
                   <UncheckedIcon className="task__checkbox" type="checkbox" />
 
-                  <span className="task__description">{task.name}</span>
+                  <p className="task__description">{task.name}</p>
 
                   <span className="task__user-name">
                     {task.assignedTo === "all" ? "" : task.assignedTo}

@@ -11,8 +11,13 @@ interface INotification {
   updatedAt: string;
 }
 
-export const NotificationButton = () => {
+interface INotificationButtonProps {
+  seemed?: boolean;
+}
+
+export const NotificationButton = ({ seemed }: INotificationButtonProps) => {
   const [notifications, setNotifications] = useState("0");
+  const [isSeemed, setIsSeemed] = useState(false);
 
   const date = new Date();
 
@@ -37,7 +42,10 @@ export const NotificationButton = () => {
   return (
     <Link href="/notifications">
       <a>
-        <Container notificationsAmount={notifications}>
+        <Container
+          className={seemed || notifications === "0" ? "dont-show" : ""}
+          notificationsAmount={notifications}
+        >
           <NotificationIcon />
         </Container>
       </a>

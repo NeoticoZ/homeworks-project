@@ -108,7 +108,7 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
 
       Router.push("/dashboard");
     } catch (err: any) {
-      toast.error(err.message);
+      toast.error(err.response.data.error);
     }
   };
 
@@ -134,7 +134,7 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
 
       Router.push("/dashboard");
     } catch (err: any) {
-      toast.error(err.message);
+      toast.error(err.response.data.error);
     }
   };
 

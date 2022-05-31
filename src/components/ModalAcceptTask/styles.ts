@@ -38,7 +38,7 @@ export const Wrapper = styled.div`
         color: ${({ theme }) => theme.text};
 
         background: transparent;
-        border: 1px solid var(--gray-400);
+        border: 1px solid ${({ theme }) => theme.borderSecondary};
       }
 
       &:hover {

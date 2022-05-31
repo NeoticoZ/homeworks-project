@@ -11,14 +11,16 @@ export const Container = styled.div`
 
   transition: height 0.2s;
 
-  border-bottom: 1px solid ${({ theme }) => theme.borderSecondary};
-
   .accordion__button {
     width: 100%;
 
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    &:focus {
+      outline: 0;
+    }
   }
 
   .accordion__content {

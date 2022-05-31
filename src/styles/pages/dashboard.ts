@@ -68,6 +68,7 @@ export const Wrapper = styled.section`
 `;
 
 export const Tasks = styled.ul`
+  max-width: 100%;
   margin-top: 1rem;
 
   display: flex;
@@ -76,12 +77,13 @@ export const Tasks = styled.ul`
 
   .task {
     width: 100%;
-    height: 2.5rem;
+    height: 6rem;
+
+    border: 1px solid ${({ theme }) => theme.borderSecondary};
 
     display: flex;
-    align-items: center;
 
-    padding: 0 1rem;
+    padding: 1rem;
 
     border-radius: 5px;
 
@@ -93,6 +95,7 @@ export const Tasks = styled.ul`
 
     &__description {
       margin-left: 0.8rem;
+      word-break: break-all;
     }
 
     &__user-name {
@@ -103,7 +106,7 @@ export const Tasks = styled.ul`
       margin-left: 2rem;
 
       display: flex;
-      align-items: center;
+      align-items: flex-end;
 
       svg {
         transition: 0.2s;
@@ -132,8 +135,8 @@ export const OptionsIcon = styled(BsHandIndexThumb)`
 `;
 
 export const UncheckedIcon = styled(BiSquare)`
-  width: 1.3rem;
-  height: 1.3rem;
+  min-width: 1.3rem;
+  min-height: 1.3rem;
 `;
 
 export const CheckedIcon = styled(FcCheckmark)`

@@ -35,7 +35,7 @@ export function ModalAcceptTask({
         <h2 className="title">Aceitar tarefa</h2>
 
         <p className="description">
-          Você tem certeza que deseja aceitar esta tarefa?
+          Tem certeza que deseja aceitar esta tarefa?
         </p>
 
         <div className="option-buttons">

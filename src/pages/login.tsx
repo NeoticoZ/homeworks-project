@@ -26,7 +26,7 @@ const Login: NextPage = () => {
 
     setTimeout(() => {
       setIsSubmitting(false);
-    }, 3000);
+    }, 5000);
   };
 
   return (

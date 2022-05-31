@@ -22,7 +22,9 @@ export const Container = styled.button<Props>`
 
   transition: 0.1s;
 
-  display: ${(props) => (props.notificationsAmount !== "0" ? "block" : "none")};
+  &:focus {
+    outline: 2px solid rgba(var(--color-primary-rgb), 0.5);
+  }
 
   &:after {
     content: "${(props) => props.notificationsAmount}";
@@ -51,6 +53,10 @@ export const Container = styled.button<Props>`
 
   &:hover {
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.4);
+  }
+
+  &.dont-show {
+    display: none;
   }
 
   @media (min-width: 768px) {

@@ -26,6 +26,10 @@ export const Tab = styled.div`
     border-right: 1px solid ${({ theme }) => theme.border};
     border-top: 1px solid ${({ theme }) => theme.border};
 
+    &:focus {
+      outline: 2px solid rgba(var(--primary-rgb), 0.5);
+    }
+
     &:first-child {
       border-left: 1px solid ${({ theme }) => theme.border};
     }
@@ -77,7 +81,8 @@ export const Tasks = styled.ul`
 
   .task {
     width: 100%;
-    height: 6rem;
+    min-height: 6rem;
+    height: auto;
 
     border: 1px solid ${({ theme }) => theme.borderSecondary};
 
@@ -89,17 +94,28 @@ export const Tasks = styled.ul`
 
     transition: 0.1s;
 
+    position: relative;
+
     &__checkbox {
       pointer-events: none;
     }
 
     &__description {
+      flex: 1;
+
       margin-left: 0.8rem;
+      margin-right: 1rem;
+
       word-break: break-all;
     }
 
     &__user-name {
       margin-left: auto;
+
+      align-self: flex-end;
+
+      position: absolute;
+      right: 3rem;
     }
 
     &__option {
@@ -113,6 +129,14 @@ export const Tasks = styled.ul`
       }
 
       &:hover {
+        svg {
+          fill: var(--blue);
+        }
+      }
+
+      &:focus {
+        outline: 0;
+
         svg {
           fill: var(--blue);
         }

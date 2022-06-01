@@ -25,7 +25,7 @@ export const Container = styled.aside`
   }
 
   @media (min-width: 500px) {
-    width: 40%;
+    width: 50%;
   }
 
   @media (min-width: 900px) {

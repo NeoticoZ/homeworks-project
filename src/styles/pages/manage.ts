@@ -52,6 +52,10 @@ export const Wrapper = styled.div`
 
       transition: all 0.2s;
 
+      &:focus {
+        outline: 1px solid rgba(var(--blue-rgb), 0.5);
+      }
+
       &:hover {
         background: rgba(var(--blue-rgb), 0.08);
         color: var(--blue);

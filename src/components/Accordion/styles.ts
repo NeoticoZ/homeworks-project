@@ -9,7 +9,11 @@ export const Container = styled.div`
 
   overflow: hidden;
 
+  outline: 1px solid ${({ theme }) => theme.borderSecondary};
+
   transition: height 0.2s;
+
+  border-radius: 4px;
 
   .accordion__button {
     width: 100%;

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { NextPage } from "next/types";
 import { useState } from "react";
 import { useAuth } from "../hooks/useAuth";
-import { FormWrapper, Container } from "../styles/pages/login";
+import { FormWrapper, Container, SpinnerIcon } from "../styles/pages/login";
 import { withSSRLogged } from "../utils/withSSRLogged";
 
 const Register: NextPage = () => {
@@ -10,9 +10,11 @@ const Register: NextPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { signUp } = useAuth();
+  const { loading, setIsLoading, signUp } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    setIsLoading();
+
     e.preventDefault();
 
     const userData = {
@@ -74,8 +76,12 @@ const Register: NextPage = () => {
           />
         </div>
 
-        <button type="submit" className="button">
-          Cadastrar
+        <button
+          type="submit"
+          className={`button ${loading ? "button--submitting" : ""}`}
+        >
+          <span>Cadastrar</span>
+          <SpinnerIcon />
         </button>
 
         <div className="navigation">

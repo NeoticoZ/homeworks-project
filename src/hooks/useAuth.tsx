@@ -139,12 +139,17 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
         path: "/",
       });
 
+      setLoading(false);
+
       setUser(user);
 
       api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
       Router.push("/dashboard");
     } catch (err: any) {
+      setLoading(false);
+      console.log(err);
+
       toast.error(err.response.data.error);
     }
   };

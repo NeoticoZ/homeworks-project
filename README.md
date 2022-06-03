@@ -1,13 +1,19 @@
-# Projeto homeworks
-Ainda em desenvolvimento, este projeto visa resolver um problema de gerenciamento aqui em casa.
+# Projeto homeworks (frontend)
 
-Acesse o <a href="https://homeworks-project-jom0jg3ob-neoticoz.vercel.app/">preview</a>.
+Projeto ainda em sua versão mais básica, mas totalmente funcional.
 
-## Páginas que estão sendo implementadas
-Acesse as páginas abaixo para acompanhar o desenvolvimento delas.
+Funcionalidades implementadas até então:
 
-- /login
-- /register
-- /dashboard
-- /notifications
-- /manage
+- Cadastro e autenticação de usuário
+- O usuário poderá ver, aceitar e concluir tarefas
+- O administrador poderá criar tarefas e avisos.
+
+## Tecnologias utilizadas no projeto
+
+- Next.js, (SSR)
+- Context API, (context)
+- styled-components, (estilização)
+- react-icons, (icones)
+- react-modal, (modal)
+- react-toastify, (notificações)
+- nookies, (cookies)

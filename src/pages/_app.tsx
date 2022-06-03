@@ -9,9 +9,11 @@ import { ToastContainer } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
 import ErrorBoundary from "../components/ErrorBoundary";
+import { Loading } from "../components/Loading";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [theme, setTheme] = useState("light");
+  const [isLoading, setIsLoading] = useState(true);
 
   const toggleTheme = () => {
     setTheme(theme === "light" ? "dark" : "light");
@@ -19,7 +21,12 @@ function MyApp({ Component, pageProps }: AppProps) {
   };
 
   useEffect(() => {
+    setIsLoading(false);
+  }, []);
+
+  useEffect(() => {
     const localTheme = window.localStorage.getItem("theme");
+
     if (localTheme) {
       setTheme(localTheme);
     }
@@ -30,6 +37,8 @@ function MyApp({ Component, pageProps }: AppProps) {
       <AuthProvider>
         <ErrorBoundary>
           <Header toggleTheme={toggleTheme} theme={theme} />
+
+          {isLoading && <Loading />}
 
           <Component {...pageProps} />
 

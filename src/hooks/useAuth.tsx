@@ -31,6 +31,8 @@ interface ISignUpCredentials {
 
 interface IAuthContextData {
   user: IUser;
+  loading: boolean;
+  setIsLoading(): void;
   signIn(credentials: ISignInCredentials): Promise<void>;
   signUp(credentials: ISignUpCredentials): Promise<void>;
   signOut(): void;
@@ -53,6 +55,7 @@ export const signOut = () => {
 export const AuthProvider = ({ children }: IAuthProvider) => {
   const [user, setUser] = useState({} as IUser);
   const isAuthenticated = !!user;
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     authChannel = new BroadcastChannel("auth");
@@ -86,6 +89,10 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
     }
   }, []);
 
+  const setIsLoading = () => {
+    setLoading(true);
+  };
+
   const signIn = async ({ email, password }: ISignInCredentials) => {
     try {
       const response = await api.post("/login", { email, password });
@@ -102,12 +109,16 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
         path: "/",
       });
 
+      setLoading(false);
+
       setUser(user);
 
       api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
       Router.push("/dashboard");
     } catch (err: any) {
+      setLoading(false);
+
       toast.error(err.response.data.error);
     }
   };
@@ -140,7 +151,15 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
 
   return (
     <AuthContext.Provider
-      value={{ signIn, signUp, signOut, isAuthenticated, user }}
+      value={{
+        loading,
+        setIsLoading,
+        signIn,
+        signUp,
+        signOut,
+        isAuthenticated,
+        user,
+      }}
     >
       {children}
     </AuthContext.Provider>

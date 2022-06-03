@@ -8,12 +8,11 @@ import { withSSRLogged } from "../utils/withSSRLogged";
 const Login: NextPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const { signIn } = useAuth();
+  const { loading, setIsLoading, signIn } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    setIsSubmitting(true);
+    setIsLoading();
 
     e.preventDefault();
 
@@ -23,10 +22,6 @@ const Login: NextPage = () => {
     };
 
     signIn(userData);
-
-    setTimeout(() => {
-      setIsSubmitting(false);
-    }, 5000);
   };
 
   return (
@@ -66,7 +61,7 @@ const Login: NextPage = () => {
 
         <button
           type="submit"
-          className={`button ${isSubmitting ? "button--submitting" : ""}`}
+          className={`button ${loading ? "button--submitting" : ""}`}
         >
           <span>Entrar</span>
           <SpinnerIcon />

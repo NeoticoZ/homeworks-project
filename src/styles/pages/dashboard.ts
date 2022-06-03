@@ -1,22 +1,34 @@
 import styled from "styled-components";
 
 import { BsHandIndexThumb } from "react-icons/bs";
-import { AiOutlinePlusSquare } from "react-icons/ai";
+import { BiSquare } from "react-icons/bi";
+import { FcCheckmark } from "react-icons/fc";
+import { IoMdCheckboxOutline } from "react-icons/io";
 
 export const Container = styled.main`
   max-width: 900px;
 
-  margin: 4rem auto;
+  margin: 4rem 1rem;
+
+  @media (min-width: 900px) {
+    margin: 4rem auto;
+  }
 `;
 
 export const Tab = styled.div`
+  display: flex;
+
   button {
     background: ${({ theme }) => theme.primary};
 
-    padding: 0.8rem 2rem;
+    padding: 0.8rem 1rem;
 
     border-right: 1px solid ${({ theme }) => theme.border};
     border-top: 1px solid ${({ theme }) => theme.border};
+
+    &:focus {
+      outline: 2px solid rgba(var(--primary-rgb), 0.5);
+    }
 
     &:first-child {
       border-left: 1px solid ${({ theme }) => theme.border};
@@ -31,17 +43,36 @@ export const Tab = styled.div`
       background: ${({ theme }) => theme.secondary};
     }
   }
+
+  @media (max-width: 500px) {
+    button {
+      width: 100%;
+
+      padding: 0.8rem 0;
+    }
+  }
+
+  @media (min-width: 500px) {
+    button {
+      padding: 0.8rem 2rem;
+    }
+  }
 `;
 
 export const Wrapper = styled.section`
   background: ${({ theme }) => theme.primary};
 
-  padding: 3rem 4rem;
+  padding: 2rem;
 
   border: 1px solid ${({ theme }) => theme.border};
+
+  @media (min-width: 768px) {
+    padding: 3rem 4rem;
+  }
 `;
 
 export const Tasks = styled.ul`
+  max-width: 100%;
   margin-top: 1rem;
 
   display: flex;
@@ -50,34 +81,48 @@ export const Tasks = styled.ul`
 
   .task {
     width: 100%;
-    height: 2.5rem;
+    min-height: 6rem;
+    height: auto;
+
+    border: 1px solid ${({ theme }) => theme.borderSecondary};
 
     display: flex;
-    align-items: center;
 
-    padding: 0 1rem;
+    padding: 1rem;
 
     border-radius: 5px;
 
     transition: 0.1s;
+
+    position: relative;
 
     &__checkbox {
       pointer-events: none;
     }
 
     &__description {
+      flex: 1;
+
       margin-left: 0.8rem;
+      margin-right: 1rem;
+
+      word-break: break-all;
     }
 
     &__user-name {
       margin-left: auto;
+
+      align-self: flex-end;
+
+      position: absolute;
+      right: 3rem;
     }
 
     &__option {
       margin-left: 2rem;
 
       display: flex;
-      align-items: center;
+      align-items: flex-end;
 
       svg {
         transition: 0.2s;
@@ -88,10 +133,22 @@ export const Tasks = styled.ul`
           fill: var(--blue);
         }
       }
+
+      &:focus {
+        outline: 0;
+
+        svg {
+          fill: var(--blue);
+        }
+      }
     }
 
-    &:hover {
-      background: ${({ theme }) => theme.secondary};
+    &--done {
+      opacity: 0.6;
+
+      .task__option {
+        pointer-events: none;
+      }
     }
   }
 `;
@@ -101,7 +158,17 @@ export const OptionsIcon = styled(BsHandIndexThumb)`
   height: 1.3rem;
 `;
 
-export const UncheckedIcon = styled(AiOutlinePlusSquare)`
+export const UncheckedIcon = styled(BiSquare)`
+  min-width: 1.3rem;
+  min-height: 1.3rem;
+`;
+
+export const CheckedIcon = styled(FcCheckmark)`
   width: 1.3rem;
   height: 1.3rem;
+`;
+
+export const CheckboxIcon = styled(IoMdCheckboxOutline)`
+  width: 1.5rem;
+  height: 1.5rem;
 `;

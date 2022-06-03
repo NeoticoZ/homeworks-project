@@ -3,7 +3,11 @@ import styled from "styled-components";
 export const Container = styled.main`
   max-width: 900px;
 
-  margin: 4rem auto;
+  margin: 4rem 1rem;
+
+  @media (min-width: 900px) {
+    margin: 4rem auto;
+  }
 `;
 
 export const Wrapper = styled.div`
@@ -15,9 +19,9 @@ export const Wrapper = styled.div`
 
   .buttons {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 1.5rem;
 
     margin-top: 2rem;
     margin-bottom: 1rem;
@@ -25,6 +29,14 @@ export const Wrapper = styled.div`
     &__span {
       display: flex;
       align-items: center;
+    }
+
+    @media (min-width: 500px) {
+      flex-direction: row;
+
+      & {
+        gap: 1.5rem;
+      }
     }
   }
 
@@ -39,6 +51,10 @@ export const Wrapper = styled.div`
       border: 1px solid ${({ theme }) => theme.borderSecondary};
 
       transition: all 0.2s;
+
+      &:focus {
+        outline: 1px solid rgba(var(--blue-rgb), 0.5);
+      }
 
       &:hover {
         background: rgba(var(--blue-rgb), 0.08);

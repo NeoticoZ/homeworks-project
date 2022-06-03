@@ -2,7 +2,11 @@ import styled from "styled-components";
 
 import { IoMdNotifications } from "react-icons/io";
 
-export const Container = styled.button`
+interface Props {
+  notificationsAmount: string;
+}
+
+export const Container = styled.button<Props>`
   width: 3.2rem;
   height: 3.2rem;
 
@@ -13,13 +17,17 @@ export const Container = styled.button`
   box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.2);
 
   position: fixed;
-  right: 4rem;
+  right: 1rem;
   bottom: 4rem;
 
   transition: 0.1s;
 
+  &:focus {
+    outline: 2px solid rgba(var(--color-primary-rgb), 0.5);
+  }
+
   &:after {
-    content: "1";
+    content: "${(props) => props.notificationsAmount}";
 
     display: flex;
     justify-content: center;
@@ -45,6 +53,14 @@ export const Container = styled.button`
 
   &:hover {
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.4);
+  }
+
+  &.dont-show {
+    display: none;
+  }
+
+  @media (min-width: 768px) {
+    right: 4rem;
   }
 `;
 

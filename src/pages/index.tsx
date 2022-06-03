@@ -11,9 +11,9 @@ const Home: NextPage = () => {
         <h1 className="title">Projeto homeworks</h1>
 
         <p className="paragraph">
-          Uma boa organização é essencial para o funcionamento adequado de
-          qualquer coisa e pensando nisso, decidi criar esta aplicação, com o
-          intuito de te ajudar a gerenciar as tarefas de casa.
+          Esta aplicação foi desenvolvida com o intuito de te ajudar no
+          gerenciamento de casa, quando estiver fora. Para isso, você poderá
+          criar tarefas e acompanhar o desenvolvimento delas.
         </p>
 
         <Link href="/login">

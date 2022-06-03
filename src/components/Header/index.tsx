@@ -1,3 +1,4 @@
+import { GetServerSideProps } from "next";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
 import { DropNavigation } from "../DropNavigation";

@@ -61,7 +61,7 @@ const Dashboard: NextPage<ITasks> = ({ tasks }) => {
     const month = date.getMonth() + 1;
     const year = date.getFullYear();
 
-    return `${day < 10 && "0"}${day}/${month < 10 && "0"}${month}/${year}`;
+    return `${day < 10 ? "0" : ""}${day}/${month < 10 && "0"}${month}/${year}`;
   };
 
   const actualDate = getActualDate();
@@ -90,7 +90,7 @@ const Dashboard: NextPage<ITasks> = ({ tasks }) => {
       </Tab>
 
       <Wrapper>
-        <h2>Tarefas dia {actualDate}</h2>
+        <h2>Tarefas do dia {actualDate}</h2>
 
         <Tasks>
           {tasks.map(
